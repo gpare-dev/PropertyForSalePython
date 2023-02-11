@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Properties - Best sales</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style type="text/css" media="screen">
+    
+    header {
+        color: #fff;
+    }
+
+    .navbar-brand {
+        margin-left: 50px;
+    }
+    
+    .album {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 25px;
+      margin: 100px 250px;
+    }
+
+    .photo {
+      width: 100%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .photo img {
+      width: 100%;
+    }
+
+    .photo .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 25%;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      display: flex;
+      opacity: 0;
+      transition: opacity 0.3s;
+      opacity: 1;
+      padding: 10px;
+      font-size: 1.2em;
+    }
+
+    .photo:hover .overlay {
+      opacity: 0.8;
+    }
+
+    .description {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 100%;
+      text-align: center;
+    }
+
+    .photo .overlay-reduction {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 20%;
+      height: 25%;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      display: flex;
+      opacity: 0;
+      transition: opacity 0.3s;
+      opacity: 1;
+      padding: 10px;
+      font-size: 1.2em;
+    }
+
+    .photo:hover .overlay-reduction {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 1600px) {
+      .album {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    @media (max-width: 1400px) {
+      .album {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 1200px) {
+      .album {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 1000px) {
+      .album {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 fixed-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Properties - Best sales</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <div class="album">
+            {% for property in properties %}
+            <div class="photo">
+                <a href="{{property['url']}}">
+                <img src="{{property['thumbnail_url']}}">
+                <div class="overlay-reduction">
+                    <p class="description"><b>{{property['sale']}}%</b></p>
+                </div>
+                <div class="overlay">
+                    <p class="description">
+                        Original price: <b>${{property['original_price']}}{{property['taxable_text']}}</b><br/>
+                        Current price: <b>${{property['current_price']}}{{property['taxable_text']}}</b></p>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
